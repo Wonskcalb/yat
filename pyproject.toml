@@ -1,0 +1,27 @@
+[project]
+name = "yat"
+version = "0.1.0"
+description = "Yet another ToDo app"
+authors = [
+    { name = "Valentin Famelart", email = "valentin.famelart@gitguardian.com" }
+]
+dependencies = [
+    "django>=5.0.7",
+    "django-ninja>=1.2.2",
+]
+readme = "README.md"
+requires-python = ">= 3.12"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = []
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/yat"]
