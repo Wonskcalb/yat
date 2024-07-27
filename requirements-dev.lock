@@ -18,12 +18,15 @@ django==5.0.7
     # via yat
 django-ninja==1.2.2
     # via yat
+django-types==0.19.1
 pydantic==2.8.2
     # via django-ninja
 pydantic-core==2.20.1
     # via pydantic
 sqlparse==0.5.1
     # via django
+types-psycopg2==2.9.21.20240417
+    # via django-types
 typing-extensions==4.12.2
     # via pydantic
     # via pydantic-core
