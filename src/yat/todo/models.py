@@ -1,5 +1,12 @@
-from typing import Iterable
+from collections.abc import Sequence
+from typing import Iterable, TYPE_CHECKING, cast
+
 from django.db import models
+
+from returns.io import impure_safe
+
+if TYPE_CHECKING:
+    from todo.models import Item
 
 
 class ItemManager(models.Manager):
@@ -17,10 +24,15 @@ class ItemManager(models.Manager):
     def checked(self):
         return self.filter(done=True)
 
-
-    def batch_toggle(self, pks: Iterable[int]):
+    @impure_safe
+    def batch_toggle(self, pks: Iterable[int]) -> Sequence["Item"]:
         self.filter(pk__in=pks).update(done=not models.F("done"))
-        return self.filter(pk__in=pks)
+        return cast(Sequence, self.filter(pk__in=pks))
+
+    @impure_safe
+    def batch_delete(self, pks: Iterable[int]) -> None:
+        self.filter(pk__in=pks).delete()
+        return
 
 class Item(models.Model):
     """

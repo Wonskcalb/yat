@@ -1,5 +1,17 @@
+from collections.abc import Sequence
 from typing import Literal
 from ninja import FilterSchema, Schema
+
+
+class ErrorBody(Schema):
+    type: str
+    loc: list | int
+    msg: str
+    ctx: dict
+
+
+class PydanticError(Schema):
+    detail: list[ErrorBody]
 
 
 class Message(Schema):
@@ -25,19 +37,18 @@ class ItemOut(Schema):
     description: str
     done: bool
 
+    class Config:
+        from_attributes = True
 
-class ActionIn(Schema):
+
+class BaseAction(Schema):
     action: Literal["toggle", "delete"]
+
+
+class ActionIn(BaseAction):
     ids: list[int]
 
 
-class ErrorBody(Schema):
-    type: str
-    loc: list | int
-    msg: str
-    ctx: dict
-
-
-class PydanticError(Schema):
-    detail: list[ErrorBody]
-
+class ActionOut(BaseAction):
+    error: ErrorBody | None = None
+    items: Sequence[ItemOut] | None = None

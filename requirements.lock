@@ -22,8 +22,11 @@ pydantic==2.8.2
     # via django-ninja
 pydantic-core==2.20.1
     # via pydantic
+returns==0.23.0
+    # via yat
 sqlparse==0.5.1
     # via django
 typing-extensions==4.12.2
     # via pydantic
     # via pydantic-core
+    # via returns
