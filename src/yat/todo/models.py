@@ -32,7 +32,7 @@ class ItemManager(models.Manager):
     @impure_safe
     def batch_delete(self, pks: Iterable[int]) -> None:
         self.filter(pk__in=pks).delete()
-        return
+
 
 class Item(models.Model):
     """

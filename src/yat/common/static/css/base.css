@@ -1,0 +1,112 @@
+.sidebar, .content {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: row;
+    margin: 0;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    max-width: 40%;
+    min-width: 20%;
+    height: 100vh;
+    background-color: #333;
+    color: white;
+    padding: 4rem;
+    overflow-y: auto; /* Vertical scroll if content overflows */
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.content {
+    min-width: 80%;
+    max-width: 60%;
+    padding: 0 5rem;
+}
+
+.item {
+    padding: .5rem 0;
+    display: flex;
+    align-content: center;
+    flex-direction: row;
+}
+
+.item > i {
+    margin-right: .5rem;
+}
+
+.item > i.hidden-until-hovered {
+    display: none;
+}
+.item:hover > i.hidden-until-hovered {
+    display: initial;
+}
+
+section #completed > .item {
+    color: #c8c8c8;
+}
+section #completed > .item > span {
+    text-decoration: line-through;
+}
+
+section #completed > .item:hover {
+    color: #7c7c7c;
+}
+section #completed > .item:hover > span {
+    text-decoration: initial;
+}
+
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
+    /* Sidebar turns into a horizontal list on scroll */
+    .sidebar {
+        min-width: initial;
+        max-width: initial;
+
+        width: 100%;
+        height: 60px;
+        padding: 10px;
+        overflow-x: auto; /* Horizontal scrolling */
+        white-space: nowrap;
+    }
+
+    .sidebar ul {
+        display: flex;
+    }
+
+    .sidebar ul li {
+        margin-right: 20px;
+    }
+
+    .sidebar ul li a {
+        color: white;
+        text-decoration: none;
+    }
+
+    .content {
+        padding: 0 2rem;
+    }
+
+}

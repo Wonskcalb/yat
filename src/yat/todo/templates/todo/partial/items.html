@@ -1,0 +1,30 @@
+{% for item in items %}
+    <div class="item" id="item_{{ item.pk }}">
+        {% if item.done %}
+            <i
+                hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+                hx-post="/items/{{ item.pk }}/toggle/"
+                hx-on="click: move('item_{{ item.pk }}')"
+                class="lni lni-circle-minus"
+            ></i>
+        {% else %}
+            <i
+                hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+                hx-post="/items/{{ item.pk }}/toggle/"
+                hx-on="click: move('item_{{ item.pk }}')"
+                class="lni lni-checkmark-circle"
+            ></i>
+        {% endif %}
+        <i
+            hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+            hx-delete="/items/{{ item.pk }}/"
+            hx-confirm="Are you sure you want to delete this task?"
+            hx-target="#item_{{ item.pk }}"
+            hx-swap="delete"
+            class="lni lni-cross-circle hidden-until-hovered"
+        ></i>
+        <span>{{ item.title }}: {{ item.description }}</span>
+    </div>
+{% empty %}
+    You have nothing to do!
+{% endfor %}

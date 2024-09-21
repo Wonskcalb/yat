@@ -1,0 +1,66 @@
+{% extends "yat/base.html" %}
+
+{% block subtitle %}My Todos{% endblock %}
+
+{% block content %}
+    <section>
+    <h2>Add new todo</h2>
+
+        <form
+            hx-post="/items/"
+            hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+            hx-swap="beforeend"
+            hx-target="#planned"
+        >
+            <label for="title">Title:</label>
+            <input
+                id="title"
+                name="title"
+                placeholder="Make an awesome cake"
+                type="text"
+            >
+
+            <label for="description">Description:</label>
+            <input
+                id="description"
+                name="description"
+                placeholder="Grab one from the book"
+                type="text"
+            >
+
+            <button type="submit">Add</button>
+        </form>
+
+    </section>
+
+    <section>
+        <h2>What's on your plate</h2>
+        <section id="planned">
+                {% include 'todo/partial/items.html' with items=items %}
+            </section>
+
+    </section>
+
+    <section>
+    <h2>What's already done</h2>
+        <section
+            id="completed"
+            hx-get="/items/?state=checked"
+            hx-trigger="load"
+        >
+            <p>Loading ...</p>
+
+        </section>
+    </section>
+
+    <script>
+        function move(element_id) {
+            // Get the div and both containers
+            const div = document.getElementById(element_id);
+            const target = div.parentElement.id === 'planned' ? "completed" : "planned";
+
+            const target_element = document.getElementById(target)
+            target_element.appendChild(div);
+        }
+    </script>
+{% endblock %}

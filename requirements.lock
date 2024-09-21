@@ -13,8 +13,12 @@ annotated-types==0.7.0
     # via pydantic
 asgiref==3.8.1
     # via django
+    # via django-htmx
 django==5.0.7
+    # via django-htmx
     # via django-ninja
+    # via yat
+django-htmx==1.19.0
     # via yat
 django-ninja==1.2.2
     # via yat

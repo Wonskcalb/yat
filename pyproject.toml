@@ -9,6 +9,7 @@ dependencies = [
     "django>=5.0.7",
     "django-ninja>=1.2.2",
     "returns>=0.23.0",
+    "django-htmx>=1.19.0",
 ]
 readme = "README.md"
 requires-python = ">= 3.12"
